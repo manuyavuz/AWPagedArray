@@ -60,6 +60,8 @@
 
 @property (nonatomic, readonly) NSUInteger objectsPerPage;
 @property (nonatomic, readonly) NSUInteger numberOfPages;
+@property (nonatomic, readonly) NSUInteger numberOfInitializedPages;
+
 @property (nonatomic, readonly) NSInteger initialPageIndex;
 
 /**

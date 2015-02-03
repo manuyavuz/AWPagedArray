@@ -76,6 +76,10 @@
     return ceil((CGFloat)_totalCount/_objectsPerPage);
 }
 
+- (NSUInteger)numberOfInitializedPages {
+    return _pages.count;
+}
+
 #pragma mark - NSArray overrides
 - (id)objectAtIndex:(NSUInteger)index {
     
