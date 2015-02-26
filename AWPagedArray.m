@@ -51,8 +51,11 @@
 #pragma mark Accessing data
 - (void)setObjects:(NSArray *)objects forPage:(NSUInteger)page {
     
-    // Make sure object count is correct
-    NSAssert((objects.count == _objectsPerPage || page == [self _lastPageIndex]), @"Expected object count per page: %ld received: %ld", (unsigned long)_objectsPerPage, (unsigned long)objects.count);
+    if(_totalCount != 0)
+    {
+        // Make sure object count is correct
+        NSAssert((objects.count == _objectsPerPage || page == [self _lastPageIndex]), @"Expected object count per page: %ld received: %ld", (unsigned long)_objectsPerPage, (unsigned long)objects.count);
+    }
     
     _pages[@(page)] = objects;
     _needsUpdateProxiedArray = YES;
@@ -61,6 +64,8 @@
     return index/_objectsPerPage + _initialPageIndex;
 }
 - (NSIndexSet *)indexSetForPage:(NSUInteger)page {
+    if(!_totalCount)
+        return nil;
     NSParameterAssert(page < _initialPageIndex+[self numberOfPages]);
     
     NSUInteger rangeLength = _objectsPerPage;
